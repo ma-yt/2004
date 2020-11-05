@@ -19,3 +19,4 @@ Route::get('/', function () {
 Route::get('/test','Test\TestController@test');
 Route::get('/test2','Test\TestController@info');
 Route::get('/test3','Test\TestController@abc');
+Route::any('/weixin','Weixin\IndexController@index');
