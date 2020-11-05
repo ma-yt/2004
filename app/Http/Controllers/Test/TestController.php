@@ -21,6 +21,6 @@ class TestController extends Controller
     }
 
     public function abc(){
-        echo __METHOD__;
+        echo "一giao我里giao giao";
     }
 }
