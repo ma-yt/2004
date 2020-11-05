@@ -19,4 +19,8 @@ class TestController extends Controller
         Redis::set($key,time());
         echo Redis::get($key);
     }
+
+    public function abc(){
+        echo __METHOD__;
+    }
 }
