@@ -20,5 +20,5 @@ Route::get('/test','Test\TestController@test');
 Route::get('/test2','Test\TestController@info');
 Route::get('/test3','Test\TestController@abc');
 
-Route::any('/weixin','Weixin\IndexController@index');  //微信接入
+Route::any('/weixin','Weixin\IndexController@event');  //微信推送事件
 Route::any('/weixin/token','Weixin\IndexController@gettoken');  //调用token
