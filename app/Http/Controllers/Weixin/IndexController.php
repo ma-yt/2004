@@ -7,31 +7,23 @@ use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
-    public function index(){
-        $result = $this->checkSignature();
 
-            if($result){
-                echo $_GET["echostr"];
-                exit;
-            }
-    }
-
-    private function checkSignature()
+    private function index()
     {
         $signature = $_GET["signature"];
         $timestamp = $_GET["timestamp"];
         $nonce = $_GET["nonce"];
 
-        $token = config('weixin.Token');
+        $token = env('WX_TOKEN');
         $tmpArr = array($token, $timestamp, $nonce);
         sort($tmpArr, SORT_STRING);
         $tmpStr = implode( $tmpArr );
         $tmpStr = sha1( $tmpStr );
 
         if( $tmpStr == $signature ){
-            return true;
+            echo $_GET['echostr'];
         }else{
-            return false;
+            echo '123';
         }
     }
 }
