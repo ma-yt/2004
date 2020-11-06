@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Weixin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Log;
 use Illuminate\Support\Facades\Redis;
 
 class IndexController extends Controller
@@ -44,9 +45,8 @@ class IndexController extends Controller
         if( $tmpStr == $signature ){
            //1、接收数据
             $xml_data = file_get_contents("php://input");
-
+            Log::info($xml_data);
             //记录日志
-            file_put_contents('wx_event.log',$xml_data);
             echo "";
             die;
             //2、把xml文本转换成为php的对象或数组
