@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class IndexController extends Controller
 {
 
-    private function index()
+    public function index()
     {
         $signature = $_GET["signature"];
         $timestamp = $_GET["timestamp"];
