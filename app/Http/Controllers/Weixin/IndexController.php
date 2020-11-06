@@ -42,7 +42,24 @@ class IndexController extends Controller
         $tmpStr = sha1( $tmpStr );
 
         if( $tmpStr == $signature ){
+           //1、接收数据
+            $xml_data = file_get_contents("php://input");
+
+            //记录日志
+            file_put_contents('wx_event.log',$xml_data);
             echo "";
+            die;
+            //2、把xml文本转换成为php的对象或数组
+//            $data = simplexml_load_string($xml_data,'SimpleXMLElement');
+//
+//            $xml = "<xml>
+//                  <ToUserName><![CDATA[toUser]]></ToUserName>
+//                  <FromUserName><![CDATA[fromUser]]></FromUserName>
+//                  <CreateTime>12345678</CreateTime>
+//                  <MsgType><![CDATA[text]]></MsgType>
+//                  <Content><![CDATA[你好]]></Content>
+//                </xml>";
+//            echo $xml;
         }else{
             echo "";
         }
