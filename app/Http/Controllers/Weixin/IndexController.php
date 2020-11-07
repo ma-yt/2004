@@ -91,4 +91,10 @@ class IndexController extends Controller
         }
         echo $token;
     }
+
+    //关注回复
+    public function responseMsg(){
+        $post = file_get_contents("php://input");
+        dd($post);
+    }
 }
