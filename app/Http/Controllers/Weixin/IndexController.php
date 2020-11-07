@@ -95,6 +95,13 @@ class IndexController extends Controller
     //关注回复
     public function responseMsg(){
         $post = file_get_contents("php://input");
-        dd($post);
+        $obj = simplexml_load_string($post,"SimpleXMLElement",LIBXML_NOCDATA);
+
+        if($obj->MsgType=='event'){
+            if($obj->Event=='subscribe'){
+                $url = " https://api.weixin.qq.com/cgi-bin/user/info?access_token=".gettoken()."&openid=".env('WX_APPID')."&lang=zh_CN";
+                dd($url);
+            }
+        }
     }
 }
