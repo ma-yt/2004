@@ -50,7 +50,15 @@ class IndexController extends Controller
             echo "";
             die;
             //2、把xml文本转换成为php的对象或数组
-//            $data = simplexml_load_string($xml_data,'SimpleXMLElement');
+            $data = simplexml_load_string($xml_data,'SimpleXMLElement');
+            file_put_contents('a.txt',$data);die;
+            $openid=$this->FromUserNam;
+            if($data->MsgType=="event"){
+                if($data->Event=="subscribe"){
+                    $accesstoken = $this->gettokrn();
+                    $url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=".$accesstoken."&openid=".env('WX_APPID')."&lang=zh_CN";
+                }
+            }
 //
 //            $xml = "<xml>
 //                  <ToUserName><![CDATA[toUser]]></ToUserName>
@@ -93,19 +101,11 @@ class IndexController extends Controller
     }
 
     //关注回复
-    public function responseMsg($array){
-        $post = file_get_contents("php://input");
-        $obj = simplexml_load_string($post,"SimpleXMLElement",LIBXML_NOCDATA);
-
-        if($obj->MsgType=='event'){
-            if($obj->Event=='subscribe'){
-//                $url = " https://api.weixin.qq.com/cgi-bin/user/info?access_token=".gettoken()."&openid=".env('WX_APPID')."&lang=zh_CN";
-//                dd($url);
+    public function responseMsg($array,$Content){
                 $ToUserName = $array->FromUserName;
                 $FromUserName = $array->ToUserName;
                 $CreateTime = time();
                 $MsgType = "text";
-                $Content = "欢迎关注我的公众号";
 
                 $text = "<xml>
                   <ToUserName><![CDATA[%s]]></ToUserName>
@@ -116,6 +116,4 @@ class IndexController extends Controller
                 </xml>";
                 echo sprintf($text,$ToUserName,$FromUserName,$CreateTime,$MsgType,$Content);
             }
-        }
-    }
 }
