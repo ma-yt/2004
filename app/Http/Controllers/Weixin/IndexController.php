@@ -44,34 +44,31 @@ class IndexController extends Controller
         if( $tmpStr == $signature ){
            //1、接收数据
             $xml_data = file_get_contents("php://input");
-
             //记录日志
             file_put_contents('wx_event.log',$xml_data);
 //            echo "";
 //            die;
             //2、把xml文本转换成为php的对象或数组
             $data = simplexml_load_string($xml_data,'SimpleXMLElement');
-            file_put_contents('a.txt',$xml_data);die;
-            $openid=$this->FromUserNam;
+//            file_put_contents('a.txt',$xml_data);die;
+
             if($data->MsgType=="event"){
                 if($data->Event=="subscribe"){
                     $accesstoken = $this->gettokrn();
-                    $url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=".$accesstoken."&openid=".env('WX_APPID')."&lang=zh_CN";
+                    $openid = $data->FromUserNam;
+                    $url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=".$accesstoken."&openid=".$openid."&lang=zh_CN";
+                    $user = file_get_contents($url);
+                    $res = json_decode($user,true);
+                    $content = "欢迎老铁关注";
                 }
+                echo responseMsg($data,$content);
             }
-//
-//            $xml = "<xml>
-//                  <ToUserName><![CDATA[toUser]]></ToUserName>
-//                  <FromUserName><![CDATA[fromUser]]></FromUserName>
-//                  <CreateTime>12345678</CreateTime>
-//                  <MsgType><![CDATA[text]]></MsgType>
-//                  <Content><![CDATA[你好]]></Content>
-//                </xml>";
-//            echo $xml;
         }else{
             echo "";
         }
     }
+
+
 
     public function gettoken(){
 
