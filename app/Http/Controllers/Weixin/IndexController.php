@@ -54,7 +54,7 @@ class IndexController extends Controller
 
             if($data->MsgType=="event"){
                 if($data->Event=="subscribe"){
-                    $accesstoken = $this->gettokrn();
+                    $accesstoken = $this->gettoken();
                     $openid = $data->FromUserNam;
                     $url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=".$accesstoken."&openid=".$openid."&lang=zh_CN";
                     $user = file_get_contents($url);
