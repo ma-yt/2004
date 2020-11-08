@@ -61,7 +61,7 @@ class IndexController extends Controller
                     $res = json_decode($user,true);
                     $content = "欢迎老铁关注";
                 }
-                echo responseMsg($data,$content);
+                echo $this->responseMsg($data,$content);
             }
         }else{
             echo "";
