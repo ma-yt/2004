@@ -47,8 +47,8 @@ class IndexController extends Controller
 
             //记录日志
             file_put_contents('wx_event.log',$xml_data);
-            echo "";
-            die;
+//            echo "";
+//            die;
             //2、把xml文本转换成为php的对象或数组
             $data = simplexml_load_string($xml_data,'SimpleXMLElement');
             file_put_contents('a.txt',$data);die;
