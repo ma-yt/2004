@@ -30,4 +30,5 @@ Route::prefix('/test')->group(function(){
 Route::prefix('/weixin')->group(function(){
     Route::any('/','Weixin\IndexController@event');  //微信推送事件
     Route::any('/token','Weixin\IndexController@gettoken');  //调用token
+    Route::post('/menu','Weixin\IndexController@menu');
 });

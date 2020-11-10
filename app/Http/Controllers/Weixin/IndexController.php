@@ -102,7 +102,6 @@ class IndexController extends Controller
     }
 
 
-
     public function gettoken(){
 
         $key = "AccessToken";
@@ -171,5 +170,42 @@ class IndexController extends Controller
         ]);    //发起请求并接受响应
         $data = $response->getBody();
         echo $data;
+    }
+
+
+    //创建自定义菜单
+    public function menu(){
+        $menu = [
+                 "button"=>[
+                         [
+                              "type"=>"click",
+                              "name"=>"今日歌曲",
+                              "key"=>"V1001_TODAY_MUSIC"
+                         ],
+                          [
+                               "name"=>"菜单",
+                               "sub_button"=>[
+                                   [
+                                       "type"=>"view",
+                                       "name"=>"搜索",
+                                       "url"=>"http://www.soso.com/"
+                                    ],
+                                    [
+                                       "type"=>"click",
+                                       "name"=>"赞一下我们",
+                                       "key"=>"V1001_GOOD"
+                                    ]
+                               ]
+                         ]]
+            ];
+        $access_token = $this->gettoken();
+        $url = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=".$access_token;
+        $client = new Client();  //实例化客户端
+        $response = $client->request('POST',$url,[   //发起请求并且接受响应
+            'verify'=>false,
+            'body'=>json_encode($menu,JSON_UNESCAPED_UNICODE)
+        ]);
+        $res = $response->getBody();   //响应服务器的数据
+        echo $res;
     }
 }
