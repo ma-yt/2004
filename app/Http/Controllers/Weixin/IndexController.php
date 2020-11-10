@@ -66,7 +66,7 @@ class IndexController extends Controller
                         if($user_id){
                             $user_id->subscribe=1;
                             $user_id->save();
-                            $content = "感谢再次关注";
+                            $contentt = "感谢再次关注";
                         }else{
                             $res = [
                                 'subscribe'=>$res['subscribe'],
