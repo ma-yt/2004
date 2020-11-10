@@ -119,10 +119,10 @@ class IndexController extends Controller
 //            ];
             $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=".env('WX_APPID')."&secret=".env('WX_APPSECRET');
 
-            $client = new Client();   //实例化客户端
-            $response = $client->request('GET',$url,['verify'=>false]);    //发起请求并接受响应
-            $json_str = $response->getBody();   //服务器的响应数据
-            echo $json_str;
+//            $client = new Client();   //实例化客户端
+//            $response = $client->request('GET',$url,['verify'=>false]);    //发起请求并接受响应
+//            $json_str = $response->getBody();   //服务器的响应数据
+//            echo $json_str;
 
 //            $token=file_get_contents($url,false,stream_context_create($stream_opts));
             $token=file_get_contents($url);
