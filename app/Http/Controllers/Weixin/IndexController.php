@@ -50,7 +50,7 @@ class IndexController extends Controller
 //            echo "";
 //            die;
             //2、把xml文本转换成为php的对象或数组
-            $data = simplexml_load_string($xml_data,'SimpleXMLElement');
+            $data = simplexml_load_string($xml_data,'SimpleXMLElement',LIBXML_NOCDATA);
 //            file_put_contents('a.txt',$xml_data);die;
             if($data->MsgType=="event"){
                 if($data->Event=="subscribe"){
