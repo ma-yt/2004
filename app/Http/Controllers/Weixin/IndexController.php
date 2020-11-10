@@ -182,13 +182,23 @@ class IndexController extends Controller
                               "name"=>"今日歌曲",
                               "key"=>"V1001_TODAY_MUSIC"
                          ],
-                          [
+                         [
+                             "name"=>"京东",
+                             "sub_button"=>[
+                                 [
+                                     "type"=>"view",
+                                     "name"=>"京东京东好货",
+                                     "url"=>"http://www.jd.com"
+                                 ]
+                             ]
+                         ],
+                         [
                                "name"=>"菜单",
                                "sub_button"=>[
                                    [
                                        "type"=>"view",
                                        "name"=>"搜索",
-                                       "url"=>"http://www.soso.com/"
+                                       "url"=>"http://www.baidu.com/"
                                     ],
                                     [
                                        "type"=>"click",
