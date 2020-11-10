@@ -96,6 +96,12 @@ class IndexController extends Controller
                 }
                 echo $this->responseMsg($data,$contentt);
             }
+            //天气
+            $city = urlencode(str_replace("天气:","",$data->Content));
+            $key = "e2ca2bb61958e6478028e72b8a7a8b60";
+            $url = "http://apis.juhe.cn/simpleWeather/query?city=".$city."&key=".$key;
+            $tianqi = file_get_contents($url);
+            file_put_contents('tianqi.txt',$tianqi);
         }else{
             echo "";
         }
