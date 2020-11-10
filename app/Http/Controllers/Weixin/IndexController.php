@@ -187,7 +187,7 @@ class IndexController extends Controller
                              "sub_button"=>[
                                  [
                                      "type"=>"view",
-                                     "name"=>"京东京东好货",
+                                     "name"=>"京东好货",
                                      "url"=>"http://www.jd.com"
                                  ]
                              ]
