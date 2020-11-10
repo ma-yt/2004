@@ -16,9 +16,18 @@ Route::get('/', function () {
     phpinfo();
 });
 
-Route::get('/test','Test\TestController@test');
-Route::get('/test2','Test\TestController@info');
-Route::get('/test3','Test\TestController@abc');
+//路由分组
+Route::prefix('/test')->group(function(){
+    Route::get('/test1','Test\TestController@test');
+    Route::get('/test2','Test\TestController@info');
+    Route::get('/test3','Test\TestController@abc');
+    Route::post('/test4','Test\TestController@aaa');
+    Route::get('/guzzle','Test\TestController@guzzle');
+    Route::any('/guzzle2','Weixin\IndexController@guzzle2');
+});
 
-Route::any('/weixin','Weixin\IndexController@event');  //微信推送事件
-Route::any('/weixin/token','Weixin\IndexController@gettoken');  //调用token
+
+Route::prefix('/weixin')->group(function(){
+    Route::any('/','Weixin\IndexController@event');  //微信推送事件
+    Route::any('/token','Weixin\IndexController@gettoken');  //调用token
+});
