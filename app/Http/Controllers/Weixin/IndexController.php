@@ -66,7 +66,7 @@ class IndexController extends Controller
                         if($user_id){
                             $user_id->subscribe=1;
                             $user_id->save();
-                            $contentt = "感谢再次关注";
+                            $content = "感谢再次关注";
                         }else{
                             $res = [
                                 'subscribe'=>$res['subscribe'],
@@ -83,7 +83,7 @@ class IndexController extends Controller
 
                             ];
                             User_info::insert($res);
-                            $content = "欢迎老铁关注";
+                            $contentt = "欢迎老铁关注";
 
                         }
 
