@@ -125,12 +125,11 @@ class IndexController extends Controller
                 }else{
                     $content = "你查寻的天气失败，请输入正确的格式:天气、城市";
                 }
-                echo    $this->responseMsg($data,$content);
+                echo $this->responseMsg($data,$content);
 
             }
-//        echo    $this->responseMsg($data,$content);
         }else{
-            echo "";
+            echo "111";
         }
     }
 
