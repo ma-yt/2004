@@ -104,27 +104,28 @@ class IndexController extends Controller
                 $tianqi = file_get_contents($url);
                 //file_put_contents('tianqi.txt',$tianqi);
                 $res = json_decode($tianqi,true);
+                $content="";
                 if($res['error_code']==0){
                     $today = $res['result']['realtime'];
-                    $content = "查询天气的城市:".$res['result']['city']."\n";
-                    $content = "天气详细情况".$today['info']."\n";
-                    $content = "温度".$today['temperature']."\n";
-                    $content = "湿度".$today['humidity']."\n";
-                    $content = "风向".$today['direct']."\n";
-                    $content = "风力".$today['power']."\n";
-                    $content = "空气质量指数".$today['aqi']."\n";
+                    $content .= "查询天气的城市:".$res['result']['city']."\n";
+                    $content .= "天气详细情况".$today['info']."\n";
+                    $content .= "温度".$today['temperature']."\n";
+                    $content .= "湿度".$today['humidity']."\n";
+                    $content .= "风向".$today['direct']."\n";
+                    $content .= "风力".$today['power']."\n";
+                    $content .= "空气质量指数".$today['aqi']."\n";
 
                     //获取一个星期的天气
                     $future = $res['res']['future'];
                     foreach($future as $k=>$v){
-                        $content = "日期:".date("Y-m-d",strtotime($v['date'])).$v['temperature'].",";
-                        $content = "天气:".$v['weather']."\n";
+                        $content .= "日期:".date("Y-m-d",strtotime($v['date'])).$v['temperature'].",";
+                        $content .= "天气:".$v['weather']."\n";
                     }
                 }else{
                     $content = "你查寻的天气失败，请输入正确的格式:天气、城市";
                 }
             }
-           $this->text($data,$content);
+        echo    $this->responseMsg($data,$content);
         }else{
             echo "";
         }
