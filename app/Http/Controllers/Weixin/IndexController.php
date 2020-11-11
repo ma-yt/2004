@@ -94,14 +94,35 @@ class IndexController extends Controller
                     $user_id->subscribe=0;
                     $user_id->save();
                 }
+                //天气
+                $city = urlencode(str_replace("天气:","",$data->Content));
+                $key = "e2ca2bb61958e6478028e72b8a7a8b60";
+                $url = "http://apis.juhe.cn/simpleWeather/query?city=".$city."&key=".$key;
+                $tianqi = file_get_contents($url);
+                //file_put_contents('tianqi.txt',$tianqi);
+                $res = json_decode($tianqi,true);
+                if($res['error_code']==0){
+                    $today = $res['result']['realtime'];
+                    $contentt = "查询天气的城市:".$res['result']['city']."\n";
+                    $contentt = "天气详细情况".$today['info']."\n";
+                    $contentt = "温度".$today['temperature']."\n";
+                    $contentt = "湿度".$today['humidity']."\n";
+                    $contentt = "风向".$today['direct']."\n";
+                    $contentt = "风力".$today['power']."\n";
+                    $contentt = "空气质量指数".$today['aqi']."\n";
+
+                    //获取一个星期的天气
+                    $future = $res['res']['future'];
+                    foreach($future as $k=>$v){
+                        $contentt = "日期:".date("Y-m-d",strtotime($v['date'])).$v['temperature'].",";
+                        $contentt = "天气:".$v['weather']."\n";
+                    }
+                }else{
+                    $contentt = "你查寻的天气失败，请输入正确的格式:天气、城市";
+                }
                 echo $this->responseMsg($data,$contentt);
             }
-            //天气
-            $city = urlencode(str_replace("天气:","",$data->Content));
-            $key = "e2ca2bb61958e6478028e72b8a7a8b60";
-            $url = "http://apis.juhe.cn/simpleWeather/query?city=".$city."&key=".$key;
-            $tianqi = file_get_contents($url);
-            file_put_contents('tianqi.txt',$tianqi);
+
         }else{
             echo "";
         }
@@ -185,7 +206,7 @@ class IndexController extends Controller
                  "button"=>[
                          [
                               "type"=>"click",
-                              "name"=>"今日歌曲",
+                              "name"=>"获取天气",
                               "key"=>"V1001_TODAY_MUSIC"
                          ],
                          [
