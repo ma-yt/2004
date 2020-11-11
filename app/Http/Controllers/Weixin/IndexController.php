@@ -98,7 +98,7 @@ class IndexController extends Controller
                 }
             }
             //天气
-            if($data->Event=="text"){
+            if($data->MsgType=="text"){
                 $city = urlencode(str_replace("天气:","",$data->Content));
                 $key = "e2ca2bb61958e6478028e72b8a7a8b60";
                 $url = "http://apis.juhe.cn/simpleWeather/query?city=".$city."&key=".$key;
