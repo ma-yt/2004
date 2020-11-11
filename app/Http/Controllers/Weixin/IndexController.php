@@ -84,11 +84,12 @@ class IndexController extends Controller
                             ];
                             User_info::insert($res);
                             $contentt = "欢迎老铁关注";
-                            echo $this->responseMsg($data,$contentt);
 
                         }
 
                     }
+                    echo $this->responseMsg($data,$contentt);
+
                 }
                 //取消关注
                 if($data->Event=='unsubscribe'){
