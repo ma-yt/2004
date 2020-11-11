@@ -84,6 +84,7 @@ class IndexController extends Controller
                             ];
                             User_info::insert($res);
                             $contentt = "欢迎老铁关注";
+                            echo $this->responseMsg($data,$contentt);
 
                         }
 
@@ -94,7 +95,6 @@ class IndexController extends Controller
                     $user_id->subscribe=0;
                     $user_id->save();
                 }
-                echo $this->responseMsg($data,$contentt);
             }
             //天气
             if($data->Event=="text"){
