@@ -117,7 +117,7 @@ class IndexController extends Controller
                     $content .= "空气质量指数".$today['aqi']."\n";
 
                     //获取一个星期的天气
-                    $future = $res['res']['future'];
+                    $future = $res['result']['future'];
                     foreach($future as $k=>$v){
                         $content .= "日期:".date("Y-m-d",strtotime($v['date'])).$v['temperature'].",";
                         $content .= "天气:".$v['weather']."\n";
