@@ -94,7 +94,10 @@ class IndexController extends Controller
                     $user_id->subscribe=0;
                     $user_id->save();
                 }
-                //天气
+                echo $this->responseMsg($data,$contentt);
+            }
+            //天气
+            if($data->Event=="text"){
                 $city = urlencode(str_replace("天气:","",$data->Content));
                 $key = "e2ca2bb61958e6478028e72b8a7a8b60";
                 $url = "http://apis.juhe.cn/simpleWeather/query?city=".$city."&key=".$key;
@@ -103,26 +106,25 @@ class IndexController extends Controller
                 $res = json_decode($tianqi,true);
                 if($res['error_code']==0){
                     $today = $res['result']['realtime'];
-                    $contentt = "查询天气的城市:".$res['result']['city']."\n";
-                    $contentt = "天气详细情况".$today['info']."\n";
-                    $contentt = "温度".$today['temperature']."\n";
-                    $contentt = "湿度".$today['humidity']."\n";
-                    $contentt = "风向".$today['direct']."\n";
-                    $contentt = "风力".$today['power']."\n";
-                    $contentt = "空气质量指数".$today['aqi']."\n";
+                    $content = "查询天气的城市:".$res['result']['city']."\n";
+                    $content = "天气详细情况".$today['info']."\n";
+                    $content = "温度".$today['temperature']."\n";
+                    $content = "湿度".$today['humidity']."\n";
+                    $content = "风向".$today['direct']."\n";
+                    $content = "风力".$today['power']."\n";
+                    $content = "空气质量指数".$today['aqi']."\n";
 
                     //获取一个星期的天气
                     $future = $res['res']['future'];
                     foreach($future as $k=>$v){
-                        $contentt = "日期:".date("Y-m-d",strtotime($v['date'])).$v['temperature'].",";
-                        $contentt = "天气:".$v['weather']."\n";
+                        $content = "日期:".date("Y-m-d",strtotime($v['date'])).$v['temperature'].",";
+                        $content = "天气:".$v['weather']."\n";
                     }
                 }else{
-                    $contentt = "你查寻的天气失败，请输入正确的格式:天气、城市";
+                    $content = "你查寻的天气失败，请输入正确的格式:天气、城市";
                 }
-                echo $this->responseMsg($data,$contentt);
             }
-
+           $this->text($data,$content);
         }else{
             echo "";
         }
