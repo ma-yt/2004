@@ -130,9 +130,9 @@ class IndexController extends Controller
                 echo $this->responseMsg($data,$content);
 
             }
-        }else{
-            echo "111";
-        }
+        }//else{
+          //  echo "";
+       // }
     }
 
 
