@@ -217,12 +217,17 @@ class IndexController extends Controller
                               "key"=>"V1001_TODAY_MUSIC"
                          ],
                          [
-                             "name"=>"京东",
+                             "name"=>"商城",
                              "sub_button"=>[
                                  [
                                      "type"=>"view",
                                      "name"=>"京东好货",
                                      "url"=>"http://www.jd.com"
+                                 ],
+                                 [
+                                     "type"=>"view",
+                                     "name"=>"商城",
+                                     "url"=>"http://laravel.mayatong.top"
                                  ]
                              ]
                          ],
@@ -251,5 +256,10 @@ class IndexController extends Controller
         ]);
         $res = $response->getBody();   //响应服务器的数据
         echo $res;
+    }
+
+    //获取素材
+    public function media(){
+
     }
 }
