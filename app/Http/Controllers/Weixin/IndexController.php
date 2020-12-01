@@ -30,6 +30,26 @@ class IndexController extends Controller
     }
 
 
+    //接入
+    public function jieru(){
+        $signature = $_GET["signature"];
+        $timestamp = $_GET["timestamp"];
+        $nonce = $_GET["nonce"];
+
+        $token = env('WX_TOKEN');
+        $tmpArr = array($token, $timestamp, $nonce);
+        sort($tmpArr, SORT_STRING);
+        $tmpStr = implode( $tmpArr );
+        $tmpStr = sha1( $tmpStr );
+
+        if( $tmpStr == $signature ){
+            echo $_GET['echostr'];
+        }else{
+            return false;
+        }
+    }
+
+
     public function event()
     {
         $signature = $_GET["signature"];
@@ -103,7 +123,9 @@ class IndexController extends Controller
                 $key = "e2ca2bb61958e6478028e72b8a7a8b60";
                 $url = "http://apis.juhe.cn/simpleWeather/query?city=".$city."&key=".$key;
                 $tianqi = file_get_contents($url);
-                //file_put_contents('tianqi.txt',$tianqi);
+                //file_put_contents('tianqi.txt',$tianqi
+                //
+                //);
                 $res = json_decode($tianqi,true);
                 $content="";
                 if($res['error_code']==0){
